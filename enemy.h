@@ -17,7 +17,7 @@
 class Enemy{
 private:
     static const int length = 8;
-    static const int height = 3;
+    static const int height = 100; // any less than 100 and the code fails for some reason.
     char enemy[length][height] = {"{'$','$','$','$','$','$','$','$'}"
                                       "{'$','$','$','$','$','$','$','$'}"
                                       "{'$','$','$','$','$','$','$','$'}"};
