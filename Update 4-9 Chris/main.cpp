@@ -8,6 +8,7 @@ Notes of what to do:
 6. Incorporate scores for hitting enemies with leaderboard class
 7. Reset condition if player hit by laser/aliens, need to use a numEnemies variable to build the board instead of hard coding them in
 8. comment the functions
+9. Add a library to stop the blinking, need to research more
 */
 
 // header.h ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
