@@ -1,7 +1,7 @@
 /*
 Notes of what to do:
 1. Put player and enemy variables/functions into their own class
-2. Fix but with down then Left or Right not having a pause, [main.cpp]
+2. Fix bug with down then Left or Right not having a pause, [main.cpp]
 3. Clean up the temp and holder variables in board.h member functions
 4. Enemy Lazers; scan columns from bottom until first enemy, assign X Y variables, randomize shooting pattern
 5. Multiple enemy speeds
