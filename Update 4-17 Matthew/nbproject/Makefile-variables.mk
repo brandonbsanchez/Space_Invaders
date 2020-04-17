@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=Cygwin-Windows
 CND_ARTIFACT_DIR_Debug=dist/Debug/Cygwin-Windows
-CND_ARTIFACT_NAME_Debug=spaceinvaders
-CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin-Windows/spaceinvaders
+CND_ARTIFACT_NAME_Debug=update_4-17_matthew
+CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin-Windows/update_4-17_matthew
 CND_PACKAGE_DIR_Debug=dist/Debug/Cygwin-Windows/package
-CND_PACKAGE_NAME_Debug=spaceinvaders.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin-Windows/package/spaceinvaders.tar
+CND_PACKAGE_NAME_Debug=update4-17matthew.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin-Windows/package/update4-17matthew.tar
 # Release configuration
 CND_PLATFORM_Release=Cygwin-Windows
 CND_ARTIFACT_DIR_Release=dist/Release/Cygwin-Windows
-CND_ARTIFACT_NAME_Release=spaceinvaders
-CND_ARTIFACT_PATH_Release=dist/Release/Cygwin-Windows/spaceinvaders
+CND_ARTIFACT_NAME_Release=update_4-17_matthew
+CND_ARTIFACT_PATH_Release=dist/Release/Cygwin-Windows/update_4-17_matthew
 CND_PACKAGE_DIR_Release=dist/Release/Cygwin-Windows/package
-CND_PACKAGE_NAME_Release=spaceinvaders.tar
-CND_PACKAGE_PATH_Release=dist/Release/Cygwin-Windows/package/spaceinvaders.tar
+CND_PACKAGE_NAME_Release=update4-17matthew.tar
+CND_PACKAGE_PATH_Release=dist/Release/Cygwin-Windows/package/update4-17matthew.tar
 #
 # include compiler specific variables
 #

@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=SpaceInvaders
+PROJECTNAME=Update 4-17 Matthew
 
 # Active Configuration
 DEFAULTCONF=Debug

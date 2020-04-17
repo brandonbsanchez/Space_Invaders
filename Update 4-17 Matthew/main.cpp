@@ -40,7 +40,7 @@ private:
     int credit;                         //Credits player has.
 public:
     Leaderboard();                      //Default constructor.
-    void addScore(int);                 //Add score for kills.
+    void addScore(int, int);                 //Add score for kills.
     void setHiScore();                  //Set Hi-Score.
     int getScore(){ return scoreOne; }  //Display Player One's score.
     int getHiScore(){ return hiScore; } //Display Hi-Score.
@@ -57,8 +57,12 @@ Leaderboard::Leaderboard(){                 //Default constructor.
     credit=0;
 }
 
-void Leaderboard::addScore(int score){      //Accepts score for the kill and
+void Leaderboard::addScore(int score, int numEnemies){      //Accepts score for the kill and
     scoreOne+=score;                        //Adds score to scoreOne.
+    if(scoreOne == numEnemies * score)
+    {
+        exit(EXIT_SUCCESS);
+    }
 }
 
 void Leaderboard::setHiScore(){
@@ -386,12 +390,30 @@ void Board::movPlyrLas()
         // add delay function
         board[lasX-1][lasY] = emptyChar;
         ////////////////////////////////////////////////////////////////////////
-        ldrBrd.addScore(10);
+        ldrBrd.addScore(10, numEnemies);
         lasState = false;
         enemies--;
     }
     else
         lasState = false;
+    
+    int enemiesLeft = 0;
+    
+    for(int i = 0 ; i < row ; i++)
+    {
+        for(int j = 0 ; j < col ; j++)
+        {
+            if(board[i][j] == enemyChar)
+            {
+                enemiesLeft++;
+            }
+        }
+    }
+    
+    if(enemiesLeft == 0)
+    {
+        exit(EXIT_SUCCESS);
+    }
 }
 
 void Board::moveEnemiesLR()
