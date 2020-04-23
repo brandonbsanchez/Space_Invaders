@@ -16,7 +16,6 @@ private:
     int scoreOne;                       //Player One's score.
     int hiScore;                        //High Score.
     //int scoreTwo;                     //Player Two's score. To be implemented later.
-    int lives;                          //The number of lives the player has.
     int credit;                         //Credits player has.
 public:
     Leaderboard();                      //Default constructor.
@@ -28,6 +27,7 @@ public:
     void getLeaderboard();              //Display scores neatly.
     void getBtmBoard();                 //Display lives & credits
     void displayLives();                //Determine how many lives to display.
+    int lives;                          //The number of lives the player has.
     
     void lostLife() { --lives; }
     int getLives() { return lives; }
@@ -1280,9 +1280,10 @@ bool Board::checkEnemies()
         }
     }
     
-    if(enemiesLeft == 0)
+    if(enemiesLeft == 0 || ldrBrd.lives <= 0 )
     {
         endGame();
+        
         return false;
     }
     
@@ -1306,6 +1307,7 @@ bool Board::enemyStop(){
     if (enemy > 0){
         state = true;
     }
+    
     return state;
 }
 
