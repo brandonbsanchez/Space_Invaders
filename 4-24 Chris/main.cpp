@@ -573,6 +573,7 @@ bool Board::checkRow(int row, char direction)
 {
     bool state = false;
     int enemy = 0;
+    int las = 0;
     
     if(direction == 'R')
     {
@@ -582,9 +583,7 @@ bool Board::checkRow(int row, char direction)
                 enemy++;
             else if(board[row][i] == lasChar)
             {
-                board[row][i] = emptyChar;
-                //
-                lasStateP = false;
+                las++;
             }
             else if((board[row][i] == shield1 || board[row][i] == shield2 ||
                     board[row][i] == shield3 || board[row][i] == shield4) &&
@@ -599,6 +598,26 @@ bool Board::checkRow(int row, char direction)
                 }
             }
         }
+        
+        if(enemy > 0 && las > 0)
+        {
+            for(int i = 1; i < col-2; i++)
+            {
+                if(board[row][i] == lasChar)
+                {
+                    if(board[row][i-1] != emptyChar)
+                    {
+                        board[row][i] = emptyChar;
+                        lasStateP = false;
+                    }
+                    else
+                    {
+                        board[row][i-1] == lasChar;
+                        board[row][i] == emptyChar;
+                    }
+                }
+            }
+        }
     }
     else if (direction == 'L')
     {
@@ -608,9 +627,7 @@ bool Board::checkRow(int row, char direction)
                 enemy++;
             else if(board[row][i] == lasChar)
             {
-                board[row][i] = emptyChar;
-                //
-                lasStateP = false;
+                las++;
             }
             else if((board[row][i] == shield1 || board[row][i] == shield2 ||
                     board[row][i] == shield3 || board[row][i] == shield4) &&
@@ -626,6 +643,26 @@ bool Board::checkRow(int row, char direction)
                 enemy++;
             }
         }        
+        
+        if(enemy > 0 && las > 0)
+        {
+            for(int i = 1; i < col-2; i++)
+            {
+                if(board[row][i] == lasChar)
+                {
+                    if(board[row][i+1] != emptyChar)
+                    {
+                        board[row][i] = emptyChar;
+                        lasStateP = false;
+                    }
+                    else
+                    {
+                        board[row][i+1] == lasChar;
+                        board[row][i] == emptyChar;
+                    }
+                }
+            }
+        }
     }
     
     if(enemy > 0)
