@@ -159,7 +159,8 @@ public:
     void downStop() { downState = false; }
     
     void loseLife();
-    void endGame();
+    void winGame();
+    void loseGame();
     
     void debug();
 };
@@ -196,7 +197,7 @@ Board::Board()
     enemyPoints = 100;
     moveR = 3;
     moveL = 0;
-    enemySpeed = 12;
+    enemySpeed = 15;
     speedTime = 0;
     downState = false;
     netLR = 0;
@@ -597,8 +598,6 @@ bool Board::checkRow(int row, char direction)
                     board[row][i] = emptyChar;
                 }
             }
-//            if(board[row][i] == plyrChar)
-                // condition for restart game, lose life
         }
     }
     else if (direction == 'L')
@@ -626,8 +625,6 @@ bool Board::checkRow(int row, char direction)
                 }
                 enemy++;
             }
-//            if(board[row][i] == plyrChar)
-                // condition for restart game, lose life
         }        
     }
     
@@ -739,9 +736,9 @@ bool Board::checkCol(int col)
 void Board::enemyTimer()
 {
     if(numEnemies <= 10)
-        enemySpeed = 5;
-    else if(numEnemies <= 30)
         enemySpeed = 10;
+    else if(numEnemies <= 30)
+        enemySpeed = 12;
     else if(numEnemies <= 50)
         enemySpeed = 15;
 }
@@ -1192,14 +1189,22 @@ void Board::moveEnemyLas2(int x, int y)
 void Board::loseLife()
 {
     // this is a temp solution
-    Sleep(3000);
+    Sleep(2000);
     
     // reset some conditions
     moveR = 3;
     moveL = 0;
+    enemySpeed = 15;
+    speedTime = 0;
+    downState = false;
+    netLR = 0;
+    numEnemyLas = 0;
+    eLas1X = eLas1Y = eLas2X = eLas2Y = 0;
+    eLas1State = eLas2State = false;
+    eLasSpeed = 0;
     
     if(ldrBrd.getLives() == 0)
-        gameOver = true;
+        loseGame();
     else
     {
         createBoard();
@@ -1220,10 +1225,15 @@ bool Board::checkEnemies()
             }
         }
     }
-    
-    if(enemiesLeft == 0 || ldrBrd.lives <= 0 )
+    if(enemiesLeft == 0)
     {
-        endGame();
+        winGame();          // you win
+        
+        return false;
+    }
+    if(ldrBrd.lives <= 0 )
+    {
+        loseGame();
         
         return false;
     }
@@ -1231,11 +1241,29 @@ bool Board::checkEnemies()
     return true;
 }
 
-void Board::endGame()
+void Board::winGame()
 {
+    numEnemies = 50;
+    ldrBrd.lives = 3;
     system("clear");
-    
-    cout << "TO DO";
+    cout<<endl<<"Reseting"<<endl;
+    Sleep(2000);    
+    system("clear"); 
+}
+
+void Board::loseGame() {
+    //reset lives back to 3
+    ldrBrd.lives = 3;
+    system("clear");    
+    cout<<"_____                        _____                        "<<endl;    
+    cout<<"|  __ \\                      |  _  |                     "<<endl;  
+    cout<<"| |  \\/ __ _ _ __ ___   ___  | | | |_   _____ _ __       "<<endl;
+    cout<<"| | __ / _` | '_ ` _ \\ / _ \\ | | | \\ \\ / / _ \\ '__|  "<<endl;
+    cout<<"| |_\\ \\ (_| | | | | | |  __/ \\ \\_/ /\\ V /  __/ |     "<<endl;
+    cout<<"\\____/\\__,_|_| |_| |_|\\___|  \\___/  \\_/ \\___|_|     "<<endl;
+    cout<<endl<<"\t\tPlay Again?"<<endl;
+    cout<<endl<<endl<< "Press [ENTER] to continue...";
+    cin.ignore();                
 }
 
 bool Board::enemyStop(){
@@ -1319,7 +1347,7 @@ int main()
     }
     
     // end the game, credits
-    board.endGame();
+    board.loseGame();
 
     return 0;
 }
