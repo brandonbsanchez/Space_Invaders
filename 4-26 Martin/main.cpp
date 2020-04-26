@@ -1204,8 +1204,15 @@ void Board::moveEnemyLas2(int x, int y)
 
 void Board::loseLife()
 {
-    // this is a temp solution
+cout<<" _               _     _     _  __       _ "<<endl;
+cout<<"| |             | |   | |   (_)/ _|     | |    "<<endl;  
+cout<<"| |     ___  ___| |_  | |    _| |_ ___  | |    "<<endl;
+cout<<"| |    / _ \\/ __| __| | |   | |  _/ _ \\ | |    "<<endl;
+cout<<"| |___| (_) \\__ \\ |_  | |___| | ||  __/ |_|    "<<endl;
+cout<<"\\_____/\\___/|___/\\__| \\_____/_|_| \\___| (_)    "<<endl;
+cout<<endl<<"\t"<<"Lives Remaining: "<<ldrBrd.getLives()<<endl;    
     Sleep(2000);
+    
     
     // reset some conditions
     moveR = 3;
