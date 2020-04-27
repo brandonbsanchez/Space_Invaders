@@ -4,6 +4,8 @@
 // when the player hits an enemy with a laser and display a current high score
 // from a file.
 // -----------------------------------------------------------------------------
+#include "header.h"
+
 const int TOP5 = 5;
 
 class Leaderboard
