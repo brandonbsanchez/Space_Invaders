@@ -1311,8 +1311,6 @@ void Board::winGame()
     
     system("clear");
     
-    cin.clear();
-    
     cout << " _    _ _                         _    "    << endl;
     cout << "| |  | (_)                       | |  "     << endl;
     cout << "| |  | |_ _ __  _ __   ___ _ __  | |  "     << endl;
@@ -1320,18 +1318,13 @@ void Board::winGame()
     cout << "\\  /\\  / | | | | | | |  __/ |    |_|  "   << endl;
     cout << " \\/  \\/|_|_| |_|_| |_|\\___|_|    (_)  "  << endl;       
     
-//    ldrBrd.setHiScore();
-    
     cout << " \nPress 1 to PLAY AGAIN\nPress 2 to EXIT\n[ENTER YOUR CHOICE]: ";
     cin >> choice;
-    
-    cin.ignore();
     
     switch(choice)
     {
         case 1: break;
         case 2: exit(0); break;
-        default: cout << "\n"; winGame(); break;
     }
     
     // reset conditions in the constructor
@@ -1354,7 +1347,7 @@ void Board::winGame()
     eLas1X = eLas1Y = eLas2X = eLas2Y = 0;
     eLas1State = eLas2State = false;
     eLasSpeed = 0;
-    gameOver = false;
+    gameState = true;
     
     system("clear");
     
@@ -1380,19 +1373,14 @@ void Board::loseGame()
     cout << "| |_\\ \\ (_| | | | | | |  __/ \\ \\_/ /\\ V /  __/ |     "<<endl;
     cout << "\\____/\\__,_|_| |_| |_|\\___|  \\___/  \\_/ \\___|_|     "<<endl;
     
-//    ldrBrd.setHiScore();
-    
     cout << " \nPress 1 to PLAY AGAIN\nPress 2 to EXIT\n[ENTER YOUR CHOICE]: ";
     cin >> choice;
-    
-    cin.ignore();
     
     switch(choice)
     {
         case 1: break;
         case 2: exit(0); break;
-        default: cout << "\n"; winGame(); break;
-    }               
+    }         
     
     // reset conditions in the constructor
     ldrBrd.lives = 3;
@@ -1414,7 +1402,7 @@ void Board::loseGame()
     eLas1X = eLas1Y = eLas2X = eLas2Y = 0;
     eLas1State = eLas2State = false;
     eLasSpeed = 0;
-    gameOver = false;
+    gameState = true;
     
     system("clear");
     
