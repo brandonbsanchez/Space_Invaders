@@ -18,7 +18,7 @@ int main()
     board.createBoard();
 
     // play Space Invaders; display board, get input, move enemies
-    while(notLost)
+    while(board.getGameState())
     {
         system("clear");                // clear screen to display board again
         
@@ -56,6 +56,8 @@ int main()
         
         board.checkEnemies();           // checks number of enemies on board, lives
     }
+    
+    board.ldrBrd.setHiScore();
 
     return 0;
 }
