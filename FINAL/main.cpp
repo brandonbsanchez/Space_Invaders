@@ -18,6 +18,8 @@ int main()
     {
         system("clear");                // clear screen to display board again
         
+        board.debug();                  // debug player
+        
         if(board.getLaserStateP())      // if player laser is on the board
             board.movPlyrLas();
         
