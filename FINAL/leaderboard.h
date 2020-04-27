@@ -5,6 +5,7 @@
 // from a file.
 // -----------------------------------------------------------------------------
 #include "header.h"
+#include "record.h"
 
 const int TOP5 = 5;
 
