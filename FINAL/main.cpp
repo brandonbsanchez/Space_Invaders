@@ -1,6 +1,9 @@
 // -----------------------------------------------------------------------------
 // This is our main which controls the game.
 // -----------------------------------------------------------------------------
+#include "header.h"
+#include "board.h"
+
 int main()
 {
     // create board object, initialize bool variable
