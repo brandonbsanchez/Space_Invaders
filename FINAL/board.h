@@ -3,6 +3,9 @@
 // player, enemies, lasers, shields, and boundaries. The board is able to be
 // printed based on how fast the computer running it can handle. 
 // -----------------------------------------------------------------------------
+#include "header.h"
+#include "leaderboard.h"
+
 class Board
 {
 private:
