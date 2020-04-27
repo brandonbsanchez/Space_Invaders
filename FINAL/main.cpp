@@ -3,6 +3,7 @@
 // -----------------------------------------------------------------------------
 #include "header.h"
 #include "board.h"
+#include "record.h"
 
 int main()
 {
