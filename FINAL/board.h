@@ -13,7 +13,7 @@ private:
     int row;                    // row size of 2D array
     int col;                    // col size of 2D array
     char **board;               // dynamic 2D array for game board
-    bool gameOver;              // bool to determine if the game is over
+    bool gameState;              // bool to determine if the game is over
     char emptyChar;             // char for empty spaces on the game board
     char boundaryChar;          // char for boundaries on the sides of the board
     
@@ -70,7 +70,7 @@ public:
     void startMenu();                           // menu to introduce game
     void createBoard();                         // starting board conditions
     void dispBrd();                             // output the board itself
-    bool getGameState() { return gameOver; }    // return if game is over or not
+    bool getGameState() { return gameState; }    // return if game is over or not
     
     // player functions
     void input();                               // keyboard input of player
@@ -138,7 +138,7 @@ Board::Board()
     sHlth1 = '1';
 
     // enemy variables
-    numEnemies = 50;
+    numEnemies = 1;
     enemyPoints = 100;
     moveR = 3;
     moveL = 0;
@@ -158,7 +158,7 @@ Board::Board()
     eLasSpeed = 0;
     
     // game variables
-    gameOver = false;
+    gameState = true;
     
     // set the random number seed
     srand(static_cast<unsigned int>(time(0)));
@@ -1292,11 +1292,13 @@ void Board::checkEnemies()
     
     if(enemiesLeft == 0)
     {
+        gameState = false;
         winGame();              // you win
     }
     
     if(ldrBrd.lives <= 0 )
     {
+        gameState = false;
         loseGame();             // you lose
     }
 }
