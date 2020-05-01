@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: gray;
+}
+#container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+#board {
+    height: 600px;
+    width: 800px;
+    background-image: url(images/background.png);
+    animation: scroll 10s linear infinite;
+}
+#player {
+    position: absolute;
+    width: 40px;
+    margin-left: -20px;
+}
+@keyframes scroll {
+    from {background-position-y: 0px;}
+    to {background-position-y: 1024px;}
+}
