@@ -19,9 +19,14 @@ body {
 #player {
     position: absolute;
     width: 40px;
-    margin-left: -20px;
+    margin-left: -20px; /*Movers center of object to middle*/
 }
 @keyframes scroll {
     from {background-position-y: 0px;}
     to {background-position-y: 1024px;}
+}
+.playerLaser {
+    position: absolute;
+    height: 20px;
+    margin-left: -3.9001px;
 }
