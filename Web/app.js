@@ -41,7 +41,7 @@ class Board {
 
             if(this.enemies[i].cooldown <= 0) {
                 this.enemyLasers.push(new EnemyLaser(this.enemies[i].x + changeX, this.enemies[i].y + changeY));
-                this.enemies[i].cooldown = this.enemyLaserCooldown;
+                this.enemies[i].cooldown = rand(2, 4);
             }
         }
     }
@@ -265,10 +265,10 @@ function update() { //Updates board
     }
 
     if(board.isWon) {
-        alert('Game won!');
+        document.querySelector('#won').style.display = 'block';
     }
     else if(board.isLost) {
-        alert('Game lost.');
+        document.querySelector('#lost').style.display = 'block';
     }
     else {
         window.requestAnimationFrame(update); //Recursive
