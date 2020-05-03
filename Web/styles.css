@@ -14,12 +14,12 @@ body {
     height: 600px;
     width: 800px;
     background-image: url(images/background.png);
-    animation: scroll 10s linear infinite;
+    animation: scroll 15s linear infinite;
 }
 #player {
     position: absolute;
     width: 40px;
-    margin-left: -20px; /*Movers center of object to middle*/
+    margin-left: -20px; /*Moves center of object to middle*/
 }
 @keyframes scroll {
     from {background-position-y: 0px;}
@@ -29,4 +29,14 @@ body {
     position: absolute;
     height: 20px;
     margin-left: -3.9001px;
+}
+.enemyLaser {
+    position: absolute;
+    height: 20px;
+    margin-left: -10px;
+}
+.enemy {
+    position: absolute;
+    width: 40px;
+    margin-left: -20px;
 }
