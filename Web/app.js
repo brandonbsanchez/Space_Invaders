@@ -41,7 +41,7 @@ class Board {
 
             if(this.enemies[i].cooldown <= 0) {
                 this.enemyLasers.push(new EnemyLaser(this.enemies[i].x + changeX, this.enemies[i].y + changeY));
-                this.enemies[i].cooldown = rand(2, 4);
+                this.enemies[i].cooldown = rand(2, 4); //Change these values to change enemy fire rate
             }
         }
     }
