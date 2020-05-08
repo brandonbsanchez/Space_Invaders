@@ -62,3 +62,6 @@ body {
     padding: 10px;
     border-radius: 5px;
 }
+#lives {
+    margin-left: -710px;
+}

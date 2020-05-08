@@ -19,6 +19,13 @@ class Board {
         this.enemyLaserHeight = 20;
         this.isLost = false;
         this.isWon = false;
+
+        this.numLives = 3;
+        this.displayLives();
+    }
+
+    displayLives() {
+        document.getElementById("livesLeft").innerHTML = this.numLives;
     }
 
     createEnemies() {
@@ -65,7 +72,14 @@ class Board {
                 board.link.removeChild(player.player);
                 board.link.removeChild(this.enemyLasers[i].laser);
                 
-                return true;
+                this.numLives--;
+                this.displayLives();
+                
+                if(this.numLives == 0)
+                    return true;
+                else {
+
+                }
             }
         }
 
