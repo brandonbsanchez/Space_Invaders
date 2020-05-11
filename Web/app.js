@@ -1,4 +1,4 @@
-class Board {
+class Board {   
     constructor() {
         this.height = 600;
         this.width = 800;
@@ -21,6 +21,7 @@ class Board {
         this.isWon = false;
     }
 
+    
     createEnemies() {
         for(let i = 0 ; i < this.columns ; i++) {
             const y = this.enemyVertPadding + i * this.enemyVertSpacing;
