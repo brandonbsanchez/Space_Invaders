@@ -137,6 +137,7 @@ class Player {
                         this.lasers[i].removeLaser();
                         board.enemies[j].isDead = true;
                         board.enemies[j].removeEnemy();
+                        ldrboard.addScore(10);
                     }
                 }
             }
@@ -251,6 +252,20 @@ class Enemy {
     }
 }
 
+class Leaderboard{
+    constructor(){
+        this.score = 0;
+        this.hiScore = 0;
+    }
+    addScore(tmpScore){
+        this.score+=tmpScore;
+    }
+    update(){
+        document.getElementById('score').innerHTML = this.score;
+    }
+
+}
+
 function update() { //Updates board
     board.currentTime = Date.now();
     board.changeTime = (board.currentTime - board.pastTime) / 1000.0; //Prevents player movement depending on PC clock speed
@@ -260,6 +275,7 @@ function update() { //Updates board
     board.updateEnemies();
     board.isLost = board.updateEnemyLasers();
     board.pastTime = board.currentTime;
+    ldrboard.update();
     if(board.enemies.length === 0) {
         board.isWon = true;
     }
@@ -313,6 +329,7 @@ function rand(min, max) { //Built random function
 //'Main' Starts Here
 
 const board = new Board();
+ldrboard = new Leaderboard();
 const player = new Player();
 
 board.createEnemies();
