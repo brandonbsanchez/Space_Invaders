@@ -19,22 +19,29 @@ class Board {
         this.enemyLaserHeight = 20;
         this.isLost = false;
         this.isWon = false;
+        // this.numEnemies = 30;       // total number of enemies
+        this.enemyCount = 30;       // counter for how many enemies are left, used for resetting after losing a life
 
         this.numLives = 3;
         this.displayLives();
     }
 
+    // used to display the number of player lives left as an integer to the screen
     displayLives() {
         document.getElementById("livesLeft").innerHTML = this.numLives;
     }
-
     createEnemies() {
         for(let i = 0 ; i < this.columns ; i++) {
             const y = this.enemyVertPadding + i * this.enemyVertSpacing;
 
             for(let j = 0 ; j < this.enemiesPerRow ; j++) {
-                const x = j * this.enemyHorSpacing + this.enemyHorPadding;
-                this.enemies.push(new Enemy(x, y));
+                
+                if(this.enemyCount > 0)
+                {
+                    const x = j * this.enemyHorSpacing + this.enemyHorPadding;
+                    this.enemies.push(new Enemy(x, y));
+                    this.enemyCount--;
+                }
             }
         }
     }
@@ -69,16 +76,16 @@ class Board {
             const rect2 = this.enemyLasers[i].laser.getBoundingClientRect();
 
             if(rectIntersect(rect1, rect2)) { //Player hit
-                board.link.removeChild(player.player);
-                board.link.removeChild(this.enemyLasers[i].laser);
-                
-                this.numLives--;
-                this.displayLives();
-                
-                if(this.numLives == 0)
-                    return true;
-                else {
 
+                if(this.numLives === 0) {
+                    return true;
+                }
+                else {
+                    board.link.removeChild(player.player);
+                    board.link.removeChild(this.enemyLasers[i].laser);
+
+                    this.numLives--;
+                    this.displayLives();
                 }
             }
         }
@@ -151,6 +158,7 @@ class Player {
                         this.lasers[i].removeLaser();
                         board.enemies[j].isDead = true;
                         board.enemies[j].removeEnemy();
+                        board.enemyCount--;            // enemy destroyed  
                     }
                 }
             }
@@ -266,6 +274,8 @@ class Enemy {
 }
 
 function update() { //Updates board
+    let lives = board.numLives;
+
     board.currentTime = Date.now();
     board.changeTime = (board.currentTime - board.pastTime) / 1000.0; //Prevents player movement depending on PC clock speed
 
@@ -273,11 +283,67 @@ function update() { //Updates board
     player.loopLasersEnemies();
     board.updateEnemies();
     board.isLost = board.updateEnemyLasers();
+
+    if(lives > board.numLives && board.numLives != 0)
+    {
+        enemies = board.enemies;
+
+        for(let i = 0; i < board.enemyLasers.length; i++)
+        {
+            // board.enemyLasers[i].isDead = true;
+            board.enemyLasers[i].removeLaser();
+        }
+
+        board.enemyLasers = [];
+
+        delete board;
+        delete player;
+
+        board = new Board();
+        player = new Player();
+
+        board.enemies = enemies;
+
+        board.createEnemies();
+
+        // for(let i = 0 ; i <  ; i++) {
+
+        //     // player.lasers[i].isDead = true;
+        //     // player.lasers[i].removeLaser();
+        //     // board.enemyLasers[i].isDead = true;
+        //     // board.enemyLasers[i].removeLaser();
+        //     // board.enemies[i].isDead = true;
+        //     // board.enemies[i].removeEnemy();
+        // }
+
+        // for(int i = 0; i < )
+        // board.link.removeChild(this.enemyLasers[i].laser);
+
+        // for(let i = 0 ; i < lasers.length ; i++) {
+        //     lasers.lasers[i].isDead = true;
+        //     lasers.lasers.splice(i, 1);
+        //     i--;
+        // }
+
+        // for(let i = 0 ; i < board.enemies.length ; i++) {
+        //     board.enemies[i].isDead = true;
+        //     board.enemies.splice(i, 1);
+        //     i--;
+        // }
+
+        lives--;
+
+        // debug
+        // document.querySelector('#won').style.display = 'block';
+
+        // window.requestAnimationFrame(update); //Recursive
+    }
+
     board.pastTime = board.currentTime;
+
     if(board.enemies.length === 0) {
         board.isWon = true;
     }
-
     if(board.isWon) {
         document.querySelector('#won').style.display = 'block';
     }
@@ -326,10 +392,11 @@ function rand(min, max) { //Built random function
 
 //'Main' Starts Here
 
-const board = new Board();
-const player = new Player();
+let board = new Board();
+let player = new Player();
 
 board.createEnemies();
+this.board.enemyCount = 30;
 window.addEventListener('keydown', onKeyDown);
 window.addEventListener('keyup', onKeyUp);
 window.requestAnimationFrame(update); //Calls the update function that updates the board
