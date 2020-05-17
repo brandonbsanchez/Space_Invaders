@@ -59,6 +59,15 @@ class Board {
             }
         }
     }
+    // deleteLasers() {
+    //     for(let i = 0; i < this.enemyLasers.length; i++)
+    //     {
+    //         console.log(board.link);
+    //         // board.enemyLasers[i].isDead = true;
+    //         console.log(board.enemyLasers[i]);
+    //         this.enemyLasers[i].removeLaser();
+    //     }
+    // }
     updateEnemyLasers() { //Moves enemy lasers, removes them if they are off board, checks if player gets hit
         for(let i = 0 ; i < this.enemyLasers.length ; i++) {
             this.enemyLasers[i].updateLaser();
@@ -288,12 +297,7 @@ function update() { //Updates board
     {
         enemies = board.enemies;
 
-        for(let i = 0; i < board.enemyLasers.length; i++)
-        {
-            // board.enemyLasers[i].isDead = true;
-            board.enemyLasers[i].removeLaser();
-        }
-
+        board.link.innerHTML = "";
         board.enemyLasers = [];
 
         delete board;
@@ -332,7 +336,8 @@ function update() { //Updates board
         // }
 
         lives--;
-
+        board.numLives = lives;
+        console.log(lives);
         // debug
         // document.querySelector('#won').style.display = 'block';
 
