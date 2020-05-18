@@ -22,10 +22,9 @@ class Board {
     }
 
     reset() {
-        this.enemies = [];
         this.enemyLasers = [];
         this.link.innerHTML = "";
-        this.createEnemies();
+        console.log(this.enemies);
         this.isLost = false;
         this.isWon = false;
     }
