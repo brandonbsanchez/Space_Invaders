@@ -19,13 +19,15 @@ class Board {
         this.enemyLaserHeight = 20;
         this.isLost = false;
         this.isWon = false;
-        // this.numEnemies = 30;       // total number of enemies
-        this.enemyCount = 30;       // counter for how many enemies are left, used for resetting after losing a life
+        this.enemyCount;                // counter for how many enemies are left, used for resetting after losing a life
+        this.numLives;                  // number of lives the player has
+    }
 
+    setup() {
+        this.enemyCount = 10;
         this.numLives = 3;
         this.displayLives();
     }
-
     // used to display the number of player lives left as an integer to the screen
     displayLives() {
         document.getElementById("livesLeft").innerHTML = this.numLives;
@@ -91,7 +93,7 @@ class Board {
                 }
                 else {
                     board.link.removeChild(player.player);
-                    board.link.removeChild(this.enemyLasers[i].laser);
+                    board.link.removeChild(this.enemyLasers[i].laser);       // this causes an Uncaught DOMException, not a child of the node
 
                     this.numLives--;
                     this.displayLives();
@@ -168,6 +170,7 @@ class Player {
                         board.enemies[j].isDead = true;
                         board.enemies[j].removeEnemy();
                         board.enemyCount--;            // enemy destroyed  
+                        ldrboard.addScore(10);
                     }
                 }
             }
@@ -282,6 +285,20 @@ class Enemy {
     }
 }
 
+class Leaderboard{
+    constructor(){
+        this.score = 0;
+        this.hiScore = 0;
+    }
+    addScore(tmpScore){
+        this.score+=tmpScore;
+    }
+    update(){
+        document.getElementById('score').innerHTML = this.score;
+    }
+
+}
+
 function update() { //Updates board
     let lives = board.numLives;
 
@@ -295,7 +312,8 @@ function update() { //Updates board
 
     if(lives > board.numLives && board.numLives != 0)
     {
-        enemies = board.enemies;
+        enmy = board.enemies;        // save the number of enemies remaining
+        lives = board.numLives;         // save the number of lives left
 
         board.link.innerHTML = "";
         board.enemyLasers = [];
@@ -306,38 +324,13 @@ function update() { //Updates board
         board = new Board();
         player = new Player();
 
-        board.enemies = enemies;
+        board.enemies = enmy;
+        board.numLives = lives;
 
         board.createEnemies();
 
-        // for(let i = 0 ; i <  ; i++) {
-
-        //     // player.lasers[i].isDead = true;
-        //     // player.lasers[i].removeLaser();
-        //     // board.enemyLasers[i].isDead = true;
-        //     // board.enemyLasers[i].removeLaser();
-        //     // board.enemies[i].isDead = true;
-        //     // board.enemies[i].removeEnemy();
-        // }
-
-        // for(int i = 0; i < )
-        // board.link.removeChild(this.enemyLasers[i].laser);
-
-        // for(let i = 0 ; i < lasers.length ; i++) {
-        //     lasers.lasers[i].isDead = true;
-        //     lasers.lasers.splice(i, 1);
-        //     i--;
-        // }
-
-        // for(let i = 0 ; i < board.enemies.length ; i++) {
-        //     board.enemies[i].isDead = true;
-        //     board.enemies.splice(i, 1);
-        //     i--;
-        // }
-
         lives--;
-        board.numLives = lives;
-        console.log(lives);
+
         // debug
         // document.querySelector('#won').style.display = 'block';
 
@@ -345,6 +338,7 @@ function update() { //Updates board
     }
 
     board.pastTime = board.currentTime;
+    ldrboard.update();
 
     if(board.enemies.length === 0) {
         board.isWon = true;
@@ -398,10 +392,11 @@ function rand(min, max) { //Built random function
 //'Main' Starts Here
 
 let board = new Board();
+ldrboard = new Leaderboard();
 let player = new Player();
 
-board.createEnemies();
-this.board.enemyCount = 30;
+board.setup();                                      // set initial number of enemies and lives
+board.createEnemies();                              // create the enemies
 window.addEventListener('keydown', onKeyDown);
 window.addEventListener('keyup', onKeyUp);
-window.requestAnimationFrame(update); //Calls the update function that updates the board
+window.requestAnimationFrame(update);               // calls the update function that updates the board

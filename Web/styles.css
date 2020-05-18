@@ -1,7 +1,11 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: gray;
+    background-color: #cccccc;
+    background-image: url(images/banner.jpg), linear-gradient(black, orange);
+    background-size: 100% 375px, 100% 100%;    
+    background-position: top, 0 375px;
+    background-repeat: no-repeat;
 }
 #container {
     display: flex;
@@ -9,6 +13,12 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
+}
+#leaderboard{
+    color: white;
+    background-color: black;
+    height: 100px;
+    width: 800px;
 }
 #board {
     height: 600px;
