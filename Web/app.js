@@ -62,12 +62,17 @@ class Board {
         }
     }
     // deleteLasers() {
-    //     for(let i = 0; i < this.enemyLasers.length; i++)
-    //     {
-    //         console.log(board.link);
-    //         // board.enemyLasers[i].isDead = true;
-    //         console.log(board.enemyLasers[i]);
-    //         this.enemyLasers[i].removeLaser();
+    //     // for(let i = 0; i < this.enemyLasers.length; i++)
+    //     // {
+    //     //     console.log(board.link);
+    //     //     // board.enemyLasers[i].isDead = true;
+    //     //     console.log(board.enemyLasers[i]);
+    //     //     this.enemyLasers[i].removeLaser();
+    //     // }
+
+    //     for(let i = 0 ; i < this.enemyLasers.length ; i++) {
+    //         this.lasers[i].removeLaser();
+    //         // board.link.removeChild(this.enemyLasers[i].laser);
     //     }
     // }
     updateEnemyLasers() { //Moves enemy lasers, removes them if they are off board, checks if player gets hit
@@ -314,6 +319,8 @@ function update() { //Updates board
     {
         enmy = board.enemies;        // save the number of enemies remaining
         lives = board.numLives;         // save the number of lives left
+
+        // board.deleteLasers();
 
         board.link.innerHTML = "";
         board.enemyLasers = [];

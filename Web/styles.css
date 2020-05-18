@@ -24,6 +24,7 @@ body {
     height: 600px;
     width: 800px;
     background-image: url(images/background.png);
+    border: 5px solid rgba(95, 106, 201, 0.397);
     animation: scroll 15s linear infinite;
 }
 #player {
