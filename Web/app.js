@@ -24,9 +24,9 @@ class Board {
     reset() {
         this.enemyLasers = [];
         this.link.innerHTML = "";
-        console.log(this.enemies);
         this.isLost = false;
         this.isWon = false;
+        this.link = document.querySelector('#board');
     }
     createEnemies() {
         for(let i = 0 ; i < this.columns ; i++) {
@@ -69,9 +69,20 @@ class Board {
             const rect2 = this.enemyLasers[i].laser.getBoundingClientRect();
 
             if(rectIntersect(rect1, rect2)) { //Player hit
-                board.link.removeChild(player.player);
-                board.link.removeChild(this.enemyLasers[i].laser);
+                for(let i = 0 ; i < player.lasers.length ; i++)
+                {
+                    player.lasers[i].removeLaser();
+                }
+                player.lasers = [];
                 
+                // board.link.removeChild(player.player);
+                //board.link.removeChild(this.enemyLasers[i].laser);
+                
+                for(let i = 0 ; i < this.enemyLasers[i] ; i++) 
+                {
+                    board.link.removeChild(this.enemyLasers[i].laser);
+                    this.enemyLasers = [];
+                }
                 return true;
             }
         }
@@ -103,7 +114,7 @@ class Player {
     reset() {
         this.x = board.width / 2; //Middle of board
         this.y = board.height - 60; //Almost end of board
-        this.lasers = [];
+        console.log(this.lasers);
         
         //Creates image of ship and puts it in position
         this.player = document.createElement('img');
@@ -111,6 +122,7 @@ class Player {
         this.player.id = 'player';
         board.link.appendChild(this.player);
         this.setPosition();
+        console.log(this.player);
     }
     setPosition() {
         this.player.style.transform = `translate(${this.x}px, ${this.y}px)`; //CSS animation to move player
