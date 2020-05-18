@@ -19,8 +19,13 @@ class Board {
         this.enemyLaserHeight = 20;
         this.isLost = false;
         this.isWon = false;
+        this.lostLife = false;
+        this.lives = 3;
     }
 
+    updateLives() {
+        document.querySelector('#livesLeft').innerHTML = this.lives;
+    }
     createEnemies() {
         for(let i = 0 ; i < this.columns ; i++) {
             const y = this.enemyVertPadding + i * this.enemyVertSpacing;
@@ -62,10 +67,29 @@ class Board {
             const rect2 = this.enemyLasers[i].laser.getBoundingClientRect();
 
             if(rectIntersect(rect1, rect2)) { //Player hit
-                board.link.removeChild(player.player);
-                board.link.removeChild(this.enemyLasers[i].laser);
-                
-                return true;
+                // board.link.removeChild(player.player);
+                // board.link.removeChild(this.enemyLasers[i].laser);
+
+                this.enemyLasers[i].isDead = true;
+                this.enemyLasers[i].removeLaser();
+                this.lives--;
+                this.lostLife = true;
+                console.log(this.lives);
+                if(this.lives === 0) {
+                    return true;
+                }
+                for(let i = 0 ; i < this.enemyLasers.length ; i++) {
+                    if(this.enemyLasers[i].isDead === true) {
+                        this.enemyLasers.splice(i, 1);
+                        i--;
+                    }
+                }
+
+                for(let i = 0 ; i < this.enemyLasers.length ; i++)
+                {
+                    this.enemyLasers[i].removeLaser();
+                }
+                this.enemyLasers = [];
             }
         }
 
@@ -93,6 +117,14 @@ class Player {
         this.setPosition();
     }
 
+    reset() {
+        for(let i = 0 ; i < this.lasers.length ; i++) {
+            this.lasers[i].removeLaser();
+        }
+        this.lasers = [];
+        this.x = board.width / 2; //Middle of board
+        this.y = board.height - 60; //Almost end of board
+    }
     setPosition() {
         this.player.style.transform = `translate(${this.x}px, ${this.y}px)`; //CSS animation to move player
     }
@@ -137,6 +169,7 @@ class Player {
                         this.lasers[i].removeLaser();
                         board.enemies[j].isDead = true;
                         board.enemies[j].removeEnemy();
+                        leaderboard.addScore(10);
                     }
                 }
             }
@@ -251,6 +284,20 @@ class Enemy {
     }
 }
 
+class Leaderboard{
+    constructor(){
+        this.score = 0;
+        this.hiScore = 0;
+    }
+    addScore(tmpScore){
+        this.score+=tmpScore;
+    }
+    update(){
+        document.getElementById('score').innerHTML = this.score;
+    }
+
+}
+
 function update() { //Updates board
     board.currentTime = Date.now();
     board.changeTime = (board.currentTime - board.pastTime) / 1000.0; //Prevents player movement depending on PC clock speed
@@ -260,6 +307,7 @@ function update() { //Updates board
     board.updateEnemies();
     board.isLost = board.updateEnemyLasers();
     board.pastTime = board.currentTime;
+    leaderboard.update();
     if(board.enemies.length === 0) {
         board.isWon = true;
     }
@@ -268,7 +316,17 @@ function update() { //Updates board
         document.querySelector('#won').style.display = 'block';
     }
     else if(board.isLost) {
+        board.updateLives();
+        player.player.style.display = 'none';
         document.querySelector('#lost').style.display = 'block';
+    }
+    else if(board.lostLife) {
+        player.player.style.display = 'none';
+        player.reset();
+        board.updateLives();
+        board.lostLife = false;
+        player.player.style.display = 'block';
+        window.requestAnimationFrame(update); //Recursive
     }
     else {
         window.requestAnimationFrame(update); //Recursive
@@ -314,6 +372,7 @@ function rand(min, max) { //Built random function
 
 const board = new Board();
 const player = new Player();
+const leaderboard = new Leaderboard();
 
 board.createEnemies();
 window.addEventListener('keydown', onKeyDown);

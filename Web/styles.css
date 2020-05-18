@@ -16,6 +16,12 @@ body {
     background-image: url(images/background.png);
     animation: scroll 15s linear infinite;
 }
+#leaderboard{
+    color: white;
+    background-color: black;
+    height: 100px;
+    width: 800px;
+}
 #player {
     position: absolute;
     width: 40px;
@@ -61,4 +67,7 @@ body {
 #won button, #lost button {
     padding: 10px;
     border-radius: 5px;
+}
+#lives {
+    margin-left: -710px;
 }
