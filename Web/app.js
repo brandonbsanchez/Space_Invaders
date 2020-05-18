@@ -21,7 +21,14 @@ class Board {
         this.isWon = false;
     }
 
-    
+    reset() {
+        this.enemies = [];
+        this.enemyLasers = [];
+        this.link.innerHTML = "";
+        this.createEnemies();
+        this.isLost = false;
+        this.isWon = false;
+    }
     createEnemies() {
         for(let i = 0 ; i < this.columns ; i++) {
             const y = this.enemyVertPadding + i * this.enemyVertSpacing;
@@ -42,7 +49,7 @@ class Board {
 
             if(this.enemies[i].cooldown <= 0) {
                 this.enemyLasers.push(new EnemyLaser(this.enemies[i].x + changeX, this.enemies[i].y + changeY));
-                this.enemies[i].cooldown = rand(2, 4);
+                this.enemies[i].cooldown = rand(2, 4); //Change these values to change enemy fire rate
             }
         }
     }
@@ -94,6 +101,18 @@ class Player {
         this.setPosition();
     }
 
+    reset() {
+        this.x = board.width / 2; //Middle of board
+        this.y = board.height - 60; //Almost end of board
+        this.lasers = [];
+        
+        //Creates image of ship and puts it in position
+        this.player = document.createElement('img');
+        this.player.src = 'images/player.png';
+        this.player.id = 'player';
+        board.link.appendChild(this.player);
+        this.setPosition();
+    }
     setPosition() {
         this.player.style.transform = `translate(${this.x}px, ${this.y}px)`; //CSS animation to move player
     }
@@ -138,6 +157,7 @@ class Player {
                         this.lasers[i].removeLaser();
                         board.enemies[j].isDead = true;
                         board.enemies[j].removeEnemy();
+                        ldrboard.addScore(10);
                     }
                 }
             }
@@ -252,6 +272,20 @@ class Enemy {
     }
 }
 
+class Leaderboard{
+    constructor(){
+        this.score = 0;
+        this.hiScore = 0;
+    }
+    addScore(tmpScore){
+        this.score+=tmpScore;
+    }
+    update(){
+        document.getElementById('score').innerHTML = this.score;
+    }
+
+}
+
 function update() { //Updates board
     board.currentTime = Date.now();
     board.changeTime = (board.currentTime - board.pastTime) / 1000.0; //Prevents player movement depending on PC clock speed
@@ -261,6 +295,7 @@ function update() { //Updates board
     board.updateEnemies();
     board.isLost = board.updateEnemyLasers();
     board.pastTime = board.currentTime;
+    ldrboard.update();
     if(board.enemies.length === 0) {
         board.isWon = true;
     }
@@ -269,11 +304,12 @@ function update() { //Updates board
         document.querySelector('#won').style.display = 'block';
     }
     else if(board.isLost) {
-        document.querySelector('#lost').style.display = 'block';
+        //document.querySelector('#lost').style.display = 'block';
+        board.reset();
+        player.reset();
     }
-    else {
-        window.requestAnimationFrame(update); //Recursive
-    }
+
+    window.requestAnimationFrame(update); //Recursive
 }
 function rectIntersect(r1, r2) { //Returns true if rectangles intersect
     return !(
@@ -313,8 +349,9 @@ function rand(min, max) { //Built random function
 
 //'Main' Starts Here
 
-const board = new Board();
-const player = new Player();
+let board = new Board();
+let player = new Player();
+ldrboard = new Leaderboard();
 
 board.createEnemies();
 window.addEventListener('keydown', onKeyDown);
