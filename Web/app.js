@@ -28,6 +28,14 @@ class Board {
         this.numLives = 3;
         this.displayLives();
     }
+    reset() {
+        this.enemies = [];
+        this.enemyLasers = [];
+        this.link.innerHTML = "";
+        // this.createEnemies();
+        this.isLost = false;
+        this.isWon = false;
+    }
     // used to display the number of player lives left as an integer to the screen
     displayLives() {
         document.getElementById("livesLeft").innerHTML = this.numLives;
@@ -122,6 +130,19 @@ class Player {
         this.lasers = []; //Stores lasers from player
         this.cooldown = 0; //Cooldown to shoot lasers
 
+        //Creates image of ship and puts it in position
+        this.player = document.createElement('img');
+        this.player.src = 'images/player.png';
+        this.player.id = 'player';
+        board.link.appendChild(this.player);
+        this.setPosition();
+    }
+
+    reset() {
+        this.x = board.width / 2; //Middle of board
+        this.y = board.height - 60; //Almost end of board
+        this.lasers = [];
+        
         //Creates image of ship and puts it in position
         this.player = document.createElement('img');
         this.player.src = 'images/player.png';
@@ -322,16 +343,24 @@ function update() { //Updates board
         enmy = board.enemies;        // save the number of enemies remaining
         lives = board.numLives;         // save the number of lives left
 
-        // board.deleteLasers();
+        // // board.deleteLasers();
 
-        board.link.innerHTML = "";
-        board.enemyLasers = [];
+        // board.link.innerHTML = "";
+        // board.enemyLasers = [];
 
-        delete board;
-        delete player;
+        // delete board;
+        // delete player;
 
-        board = new Board();
-        player = new Player();
+        // board = new Board();
+        // player = new Player();
+
+        // board.enemies = enmy;
+        // board.numLives = lives;
+
+        // board.createEnemies();
+
+        board.reset();
+        player.reset();
 
         board.enemies = enmy;
         board.numLives = lives;
