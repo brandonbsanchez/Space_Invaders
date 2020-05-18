@@ -314,6 +314,8 @@ function update() { //Updates board
     player.loopLasersEnemies();
     board.updateEnemies();
     board.isLost = board.updateEnemyLasers();
+    board.pastTime = board.currentTime;
+    ldrboard.update();
 
     if(lives > board.numLives && board.numLives != 0)
     {
@@ -343,9 +345,6 @@ function update() { //Updates board
 
         // window.requestAnimationFrame(update); //Recursive
     }
-
-    board.pastTime = board.currentTime;
-    ldrboard.update();
 
     if(board.enemies.length === 0) {
         board.isWon = true;
