@@ -1,11 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #cccccc;
-    background-image: url(images/banner.jpg), linear-gradient(black, orange);
-    background-size: 100% 375px, 100% 100%;    
-    background-position: top, 0 375px;
-    background-repeat: no-repeat;
+    background-color: gray;
 }
 #container {
     display: flex;
@@ -14,24 +10,16 @@ body {
     justify-content: center;
     height: 100vh;
 }
-#leaderboard{
-    color: white;
-    background-color: black;
-    height: 100px;
-    width: 800px;
-}
 #board {
     height: 600px;
     width: 800px;
     background-image: url(images/background.png);
-    border: 5px solid rgba(95, 106, 201, 0.397);
     animation: scroll 15s linear infinite;
 }
 #player {
     position: absolute;
     width: 40px;
     margin-left: -20px; /*Moves center of object to middle*/
-    clip-path: polygon(35% 0, 63% 0, 100% 100%, 0% 100%);
 }
 @keyframes scroll {
     from {background-position-y: 0px;}

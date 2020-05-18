@@ -1,4 +1,4 @@
-class Board {   
+class Board {
     constructor() {
         this.height = 600;
         this.width = 800;
@@ -19,39 +19,22 @@ class Board {
         this.enemyLaserHeight = 20;
         this.isLost = false;
         this.isWon = false;
-        this.enemyCount;                // counter for how many enemies are left, used for resetting after losing a life
-        this.numLives;                  // number of lives the player has
-    }
 
-    setup() {
-        this.enemyCount = 10;
         this.numLives = 3;
         this.displayLives();
     }
-    reset() {
-        this.enemies = [];
-        this.enemyLasers = [];
-        this.link.innerHTML = "";
-        // this.createEnemies();
-        this.isLost = false;
-        this.isWon = false;
-    }
-    // used to display the number of player lives left as an integer to the screen
+
     displayLives() {
         document.getElementById("livesLeft").innerHTML = this.numLives;
     }
+
     createEnemies() {
         for(let i = 0 ; i < this.columns ; i++) {
             const y = this.enemyVertPadding + i * this.enemyVertSpacing;
 
             for(let j = 0 ; j < this.enemiesPerRow ; j++) {
-                
-                if(this.enemyCount > 0)
-                {
-                    const x = j * this.enemyHorSpacing + this.enemyHorPadding;
-                    this.enemies.push(new Enemy(x, y));
-                    this.enemyCount--;
-                }
+                const x = j * this.enemyHorSpacing + this.enemyHorPadding;
+                this.enemies.push(new Enemy(x, y));
             }
         }
     }
@@ -65,24 +48,10 @@ class Board {
 
             if(this.enemies[i].cooldown <= 0) {
                 this.enemyLasers.push(new EnemyLaser(this.enemies[i].x + changeX, this.enemies[i].y + changeY));
-                this.enemies[i].cooldown = rand(2, 4); //Change these values to change enemy fire rate
+                this.enemies[i].cooldown = rand(2, 4);
             }
         }
     }
-    // deleteLasers() {
-    //     // for(let i = 0; i < this.enemyLasers.length; i++)
-    //     // {
-    //     //     console.log(board.link);
-    //     //     // board.enemyLasers[i].isDead = true;
-    //     //     console.log(board.enemyLasers[i]);
-    //     //     this.enemyLasers[i].removeLaser();
-    //     // }
-
-    //     for(let i = 0 ; i < this.enemyLasers.length ; i++) {
-    //         this.lasers[i].removeLaser();
-    //         // board.link.removeChild(this.enemyLasers[i].laser);
-    //     }
-    // }
     updateEnemyLasers() { //Moves enemy lasers, removes them if they are off board, checks if player gets hit
         for(let i = 0 ; i < this.enemyLasers.length ; i++) {
             this.enemyLasers[i].updateLaser();
@@ -100,16 +69,16 @@ class Board {
             const rect2 = this.enemyLasers[i].laser.getBoundingClientRect();
 
             if(rectIntersect(rect1, rect2)) { //Player hit
-
-                if(this.numLives === 0) {
+                board.link.removeChild(player.player);
+                board.link.removeChild(this.enemyLasers[i].laser);
+                
+                this.numLives--;
+                this.displayLives();
+                
+                if(this.numLives == 0)
                     return true;
-                }
                 else {
-                    board.link.removeChild(player.player);
-                    board.link.removeChild(this.enemyLasers[i].laser);       // this causes an Uncaught DOMException, not a child of the node
 
-                    this.numLives--;
-                    this.displayLives();
                 }
             }
         }
@@ -138,18 +107,6 @@ class Player {
         this.setPosition();
     }
 
-    reset() {
-        this.x = board.width / 2; //Middle of board
-        this.y = board.height - 60; //Almost end of board
-        this.lasers = [];
-        
-        //Creates image of ship and puts it in position
-        this.player = document.createElement('img');
-        this.player.src = 'images/player.png';
-        this.player.id = 'player';
-        board.link.appendChild(this.player);
-        this.setPosition();
-    }
     setPosition() {
         this.player.style.transform = `translate(${this.x}px, ${this.y}px)`; //CSS animation to move player
     }
@@ -194,8 +151,6 @@ class Player {
                         this.lasers[i].removeLaser();
                         board.enemies[j].isDead = true;
                         board.enemies[j].removeEnemy();
-                        board.enemyCount--;            // enemy destroyed  
-                        ldrboard.addScore(10);
                     }
                 }
             }
@@ -310,23 +265,7 @@ class Enemy {
     }
 }
 
-class Leaderboard{
-    constructor(){
-        this.score = 0;
-        this.hiScore = 0;
-    }
-    addScore(tmpScore){
-        this.score+=tmpScore;
-    }
-    update(){
-        document.getElementById('score').innerHTML = this.score;
-    }
-
-}
-
 function update() { //Updates board
-    let lives = board.numLives;
-
     board.currentTime = Date.now();
     board.changeTime = (board.currentTime - board.pastTime) / 1000.0; //Prevents player movement depending on PC clock speed
 
@@ -335,58 +274,19 @@ function update() { //Updates board
     board.updateEnemies();
     board.isLost = board.updateEnemyLasers();
     board.pastTime = board.currentTime;
-    ldrboard.update();
-
-    if(lives > board.numLives && board.numLives != 0)
-    {
-        enmy = board.enemies;        // save the number of enemies remaining
-        lives = board.numLives;         // save the number of lives left
-
-        // // board.deleteLasers();
-
-        // board.link.innerHTML = "";
-        // board.enemyLasers = [];
-
-        // delete board;
-        // delete player;
-
-        // board = new Board();
-        // player = new Player();
-
-        // board.enemies = enmy;
-        // board.numLives = lives;
-
-        // board.createEnemies();
-
-        board.reset();
-        player.reset();
-
-        board.enemies = enmy;
-        board.numLives = lives;
-
-        board.createEnemies();
-
-        lives--;
-
-        // debug
-        // document.querySelector('#won').style.display = 'block';
-
-        // window.requestAnimationFrame(update); //Recursive
-    }
-
     if(board.enemies.length === 0) {
         board.isWon = true;
     }
+
     if(board.isWon) {
         document.querySelector('#won').style.display = 'block';
     }
     else if(board.isLost) {
-        //document.querySelector('#lost').style.display = 'block';
-        board.reset();
-        player.reset();
+        document.querySelector('#lost').style.display = 'block';
     }
-
-    window.requestAnimationFrame(update); //Recursive
+    else {
+        window.requestAnimationFrame(update); //Recursive
+    }
 }
 function rectIntersect(r1, r2) { //Returns true if rectangles intersect
     return !(
@@ -426,12 +326,10 @@ function rand(min, max) { //Built random function
 
 //'Main' Starts Here
 
-let board = new Board();
-ldrboard = new Leaderboard();
-let player = new Player();
+const board = new Board();
+const player = new Player();
 
-board.setup();                                      // set initial number of enemies and lives
-board.createEnemies();                              // create the enemies
+board.createEnemies();
 window.addEventListener('keydown', onKeyDown);
 window.addEventListener('keyup', onKeyUp);
-window.requestAnimationFrame(update);               // calls the update function that updates the board
+window.requestAnimationFrame(update); //Calls the update function that updates the board
