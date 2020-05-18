@@ -21,6 +21,14 @@ class Board {
         this.isWon = false;
     }
 
+    reset() {
+        this.enemies = [];
+        this.enemyLasers = [];
+        this.link.innerHTML = "";
+        this.createEnemies();
+        this.isLost = false;
+        this.isWon = false;
+    }
     createEnemies() {
         for(let i = 0 ; i < this.columns ; i++) {
             const y = this.enemyVertPadding + i * this.enemyVertSpacing;
@@ -93,6 +101,18 @@ class Player {
         this.setPosition();
     }
 
+    reset() {
+        this.x = board.width / 2; //Middle of board
+        this.y = board.height - 60; //Almost end of board
+        this.lasers = [];
+        
+        //Creates image of ship and puts it in position
+        this.player = document.createElement('img');
+        this.player.src = 'images/player.png';
+        this.player.id = 'player';
+        board.link.appendChild(this.player);
+        this.setPosition();
+    }
     setPosition() {
         this.player.style.transform = `translate(${this.x}px, ${this.y}px)`; //CSS animation to move player
     }
@@ -268,11 +288,12 @@ function update() { //Updates board
         document.querySelector('#won').style.display = 'block';
     }
     else if(board.isLost) {
-        document.querySelector('#lost').style.display = 'block';
+        //document.querySelector('#lost').style.display = 'block';
+        board.reset();
+        player.reset();
     }
-    else {
-        window.requestAnimationFrame(update); //Recursive
-    }
+
+    window.requestAnimationFrame(update); //Recursive
 }
 function rectIntersect(r1, r2) { //Returns true if rectangles intersect
     return !(
@@ -312,8 +333,8 @@ function rand(min, max) { //Built random function
 
 //'Main' Starts Here
 
-const board = new Board();
-const player = new Player();
+let board = new Board();
+let player = new Player();
 
 board.createEnemies();
 window.addEventListener('keydown', onKeyDown);
