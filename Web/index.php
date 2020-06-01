@@ -31,7 +31,7 @@
             }
 
             $sql = "INSERT INTO spaceinvaders_entity_player (name)
-            VALUES ('nameP')";
+            VALUES (DEFAULT, $nameP)";
 
             if ($conn->query($sql) === TRUE) {
                 echo "New record created successfully";
@@ -39,6 +39,5 @@
                 echo "Error: " . $sql . "<br>" . $conn->error;
             }
         ?> -->
-
     </body>
 </html>
