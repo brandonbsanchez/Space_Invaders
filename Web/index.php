@@ -1,18 +1,26 @@
 <!DOCTYPE html>
 <html>
-    <body>
+    <head>
+    <link href="style1.css" rel="stylesheet">    
+    <title>SPACE INVADERS START</title>
+    </head>
+    
+    <body>    
         <form method="post" action="game.php">
-            Name: <input type="text" id="name" name="name" required><br><br>
-            Ship:
+            
+                <h1 style="text-align:center;">SPACE INVADERS</h1>
+            NAME: <input type="text" id="name" name="name" required><br><br>
+            
+            SHIP:
                   <br><input type="radio" id="default" name="shipType" value="default" required>
-                  <label for="blue_choice">Blue</label><br>
+                  <label for="blue_choice" style="color:blue;">Blue</label><br>
                   <input type="radio" id="default" name="shipType" value="default" required>
-                  <label for="green_choice">Green</label><br>
+                  <label for="green_choice" style="color:green;">Green</label><br>
                   <input type="radio" id="default" name="shipType" value="default" required>
-                  <label for="red_choice">Red</label><br>
+                  <label for="red_choice" style="color:red;">Red</label><br>
                   <input type="radio" id="default" name="shipType" value="default" required>
-                  <label for="yellow_choice">Yellow</label><br><br>
-            <input type="submit" value="Submit">
+                  <label for="yellow_choice" style="color:yellow;">Yellow</label><br><br>
+            <input type="submit" value="SUBMIT">
         </form>
 
         <!-- <?php
@@ -31,7 +39,7 @@
             }
 
             $sql = "INSERT INTO spaceinvaders_entity_player (name)
-            VALUES ('nameP')";
+            VALUES (DEFAULT, $nameP)";
 
             if ($conn->query($sql) === TRUE) {
                 echo "New record created successfully";
@@ -39,6 +47,5 @@
                 echo "Error: " . $sql . "<br>" . $conn->error;
             }
         ?> -->
-
     </body>
 </html>
