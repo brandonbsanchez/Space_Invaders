@@ -7,6 +7,17 @@
     </head>
     <body>
         <?php
+            session_start();
+
+            $name = $_SESSION['name'];
+            $shipInput = $_SESSION['shipType'];
+            $shipColor = $_SESSION['shipColor'];
+
+            $_SESSION['topScore'] = $_POST['ldrBrdBtn'];
+            $highscore = $_SESSION['topScore'];
+
+            $scoreInput = ($highscore/100)+1;
+
             $servername = "209.129.8.7";
             $username = "RCCCSCCIS17B";
             $password = "4050240368";
@@ -18,6 +29,31 @@
             if ($conn->connect_error) {
                 die("Connection failed: " . $conn->connect_error);
             } 
+
+            $query = "INSERT INTO spaceinvaders_entity_player VALUES (DEFAULT, '$name')";
+
+            if ($conn->query($query) === TRUE) {
+                $idInput = $conn->insert_id;
+                // echo "New record created successfully. Last inserted ID is: " . $idInput."<br>"."<br>";
+            } 
+            else {
+                echo "Error: " . $query . "<br>" . $conn->error;
+            }
+
+            // add everything into the database
+            // player, ship, xref
+            echo "Name:         " . $name."<br>";
+            echo "Ship Color:   " . $shipColor."<br>";
+            echo "High Score:   " . $highscore."<br>"."<br>";
+
+            $query2 = "INSERT INTO spaceinvaders_xref_plyr_ship_highscore VALUES (DEFAULT, '$idInput', '$shipInput', '$scoreInput')";
+
+            if ($conn->query($query2) === TRUE) {
+                // echo "It worked." . "<br>"."<br>";
+            } 
+            else {
+                // echo "Error: " . $query2 . "<br>" . $conn->error;
+            }
 
             // Query the Database
             $sql = "SELECT `spaceinvaders_entity_player`.`name` AS `Player Name`, `spaceinvaders_enum_color`.`what_color` 

@@ -20,7 +20,7 @@ class Board {
         this.isLost = false;
         this.isWon = false;
         this.lostLife = false;
-        this.lives = 3;
+        this.lives = 1;
     }
 
     updateLives() {
@@ -169,7 +169,7 @@ class Player {
                         this.lasers[i].removeLaser();
                         board.enemies[j].isDead = true;
                         board.enemies[j].removeEnemy();
-                        leaderboard.addScore(10);
+                        leaderboard.addScore(100);
                     }
                 }
             }
@@ -294,6 +294,8 @@ class Leaderboard{
     }
     update(){
         document.getElementById('score').innerHTML = this.score;
+        const theScore = document.getElementById('score').innerHTML;
+        document.getElementById('ldrBrdBtn').value = theScore;
     }
 
 }
