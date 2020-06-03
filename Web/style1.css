@@ -1,1 +1,24 @@
+body {
+    
+    margin: auto;
+    width: 60%;
+    border: 5px solid white;
+    padding: 10px;
+    background-color:rgb(127, 153, 187);
+    color: white;
+}
+
+.h1 {
+    margin: 10px;
+}
+
+input {
+    margin: 10px 10px;
+    background-color: rgb(255, 210, 62);
+    border: 3px solid white;
+}
+
+.one {
+    color: blue;
+}
 
