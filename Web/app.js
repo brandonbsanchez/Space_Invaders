@@ -95,10 +95,15 @@ class Board {
 
         return false;
     }
+    getShipColor(){
+        var temp = document.getElementById("icon");
+        var shipColor = temp.src;
+        return shipColor;
+    }
 }
 
 class Player {
-    constructor() {
+    constructor(color) {
         this.x = board.width / 2; //Middle of board
         this.y = board.height - 60; //Almost end of board
         this.width = 20; //Center to one side
@@ -111,7 +116,7 @@ class Player {
 
         //Creates image of ship and puts it in position
         this.player = document.createElement('img');
-        this.player.src = 'images/player.png';
+        this.player.src = color;
         this.player.id = 'player';
         board.link.appendChild(this.player);
         this.setPosition();
@@ -371,7 +376,7 @@ function rand(min, max) { //Built random function
 //'Main' Starts Here
 
 const board = new Board();
-const player = new Player();
+const player = new Player(board.getShipColor());
 const leaderboard = new Leaderboard();
 
 board.createEnemies();
