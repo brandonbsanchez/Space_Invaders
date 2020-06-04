@@ -2,6 +2,7 @@
 <html>
     <head>
     <link href="style1.css" rel="stylesheet">    
+    <link href='https://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet'>
     <title>SPACE INVADERS START</title>
     </head>
     
@@ -9,6 +10,7 @@
         <form method="post" action="game.php">
             
                 <h1 style="text-align:center;">SPACE INVADERS</h1>
+                <h2 style="text-align:center;">*please enter your name and select a ship to start*</h2>
             NAME: <input type="text" id="name" name="name" required><br><br>
             
             SHIP:
