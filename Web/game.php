@@ -4,6 +4,10 @@
         <meta charset="utf-8">
         <title>Space Invaders</title>
         <link href="styles.css" rel="stylesheet">
+        <?php 
+            $cookie_name = "shipType";
+            setcookie($cookie_name, $_POST['shipType'], time() + (86400 * 30), "/");
+        ?>
     </head>
     <body>
     
@@ -14,7 +18,7 @@
             </div>
             <div id="board"></div>
             <div id="lives">    
-                <h1>Lives: <span id="livesLeft">3</span></h1>
+            <?php echo '<img id="icon" src="Images/' . $_POST[$cookie_name] . '" height="25" width="25">'; ?> <span id="livesLeft">3</span>
             </div>
             <div id="won">
                 <h1>Congratulations!</h1>
