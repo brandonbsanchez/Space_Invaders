@@ -20,7 +20,7 @@ class Board {
         this.isLost = false;
         this.isWon = false;
         this.lostLife = false;
-        this.lives = 1;
+        this.lives = 3;
     }
 
     updateLives() {
