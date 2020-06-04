@@ -27,6 +27,14 @@ body {
     width: 40px;
     margin-left: -20px; /*Moves center of object to middle*/
 }
+#lifeIcon{
+    width: 25px;
+    height: 25px;
+}
+.icon{
+    width: 25px;
+    height: 25px;
+}
 @keyframes scroll {
     from {background-position-y: 0px;}
     to {background-position-y: 1024px;}
