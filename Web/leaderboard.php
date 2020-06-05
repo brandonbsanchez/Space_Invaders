@@ -13,8 +13,27 @@
             $shipInput = $_SESSION['shipType'];
             $shipColor = $_SESSION['shipColor'];
 
-            $_SESSION['topScore'] = $_POST['ldrBrdBtn'];
-            $highscore = $_SESSION['topScore'];
+            // $_SESSION['topScore'] = $_POST['ldrBrdBtn'];
+            // $highscore = $_SESSION['topScore'];
+
+            if(isset($_POST['ldrBrdBtn0'])){
+                $_SESSION['topScore0'] = $_POST['ldrBrdBtn0'];
+                $highscore = $_SESSION['topScore0'];
+            } else {
+                $_SESSION['topScore1'] = $_POST['ldrBrdBtn1'];
+                $highscore = $_SESSION['topScore1'];
+            }
+
+            // $_SESSION['topScore0'] = $_POST['ldrBrdBtn0'];
+            // $_SESSION['topScore1'] = $_POST['ldrBrdBtn1'];
+
+            // if($_SESSION['topScore0'] > $_SESSION['topScore1']){
+            //     $highscore = $_SESSION['topScore0'];
+            // } else {
+            //     $highscore = $_SESSION['topScore1'];
+            // }
+
+            // $highscore = $_SESSION['topScore'];
 
             $scoreInput = ($highscore/100)+1;
 
@@ -93,10 +112,14 @@
             } else {
                 echo "0 results";
             }
-            echo "</table>";
+            echo "</table>"."<br>";
 
             $conn->close();
         ?>
+
+        <form method="POST" action="index.php">
+            <button id="playAgain" name="playAgain" type="submit" value=0>Play Again</button>
+        </form>
 
     </body>
 </html>

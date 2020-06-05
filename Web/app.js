@@ -20,7 +20,7 @@ class Board {
         this.isLost = false;
         this.isWon = false;
         this.lostLife = false;
-        this.lives = 1;
+        this.lives = 3;
     }
 
     updateLives() {
@@ -295,7 +295,8 @@ class Leaderboard{
     update(){
         document.getElementById('score').innerHTML = this.score;
         const theScore = document.getElementById('score').innerHTML;
-        document.getElementById('ldrBrdBtn').value = theScore;
+        document.getElementById('ldrBrdBtn0').value = theScore;
+        document.getElementById('ldrBrdBtn1').value = theScore;
     }
 
 }
