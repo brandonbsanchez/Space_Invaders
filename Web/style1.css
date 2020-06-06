@@ -1,17 +1,22 @@
 body {
-    font-family: 'Aldrich';font-size: 22px;
+   
     margin: auto;
     width: 60%;
     border: 5px solid white;
     padding: 10px;
-    background-color:rgb(127, 153, 187);
+    background-color:rgb(170, 170, 170);
     color: white;
     
 }
-
+.Title {
+    font-family: 'Aldrich';font-size: 35px;
+}
+.Under {
+    font-family: 'Aldrich';font-size: 20px;
+}
 input {
     margin: 10px 10px;
-    background-color: rgb(163, 163, 163);
+    background-color: rgb(156, 250, 164);
     border: 1px solid black;
     cursor: pointer;    
 }
