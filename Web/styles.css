@@ -3,7 +3,7 @@ body {
     font-size: 20px;
     margin: 0;
     padding: 0;    
-    background-image: linear-gradient(rgb(20, 20, 20), rgb(0, 129, 161));
+    background-image: linear-gradient(rgb(20, 20, 20), rgb(133, 133, 133));
     background-repeat: no-repeat;
     color: white;
 }
