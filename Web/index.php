@@ -9,8 +9,8 @@
     <body>    
         <form method="post" action="game.php">
             
-                <h1 style="text-align:center;">SPACE INVADERS</h1>
-                <h2 style="text-align:center;">*please enter your name and select a ship to start*</h2>
+                <div class="Title" style="text-align:center;">SPACE INVADERS</div>
+                <div class="Under" style="text-align:center;">*please enter your name and select a ship to start*</div>
             NAME: <input type="text" id="name" name="name" required><br><br>
             
             SHIP:
