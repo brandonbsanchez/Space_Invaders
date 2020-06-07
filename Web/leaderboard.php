@@ -44,6 +44,12 @@
                 echo "Error: " . $query . "<br>" . $conn->error;
             }
 
+            // add everything into the database
+            // player, ship, xref
+            echo "Name:         " . $name."<br>";
+            echo "Ship Color:   " . $shipColor."<br>";
+            echo "High Score:   " . $highscore."<br>"."<br>";
+
             $query2 = "INSERT INTO spaceinvaders_xref_plyr_ship_highscore VALUES (DEFAULT, '$idInput', '$shipInput', '$scoreInput')";
 
             if ($conn->query($query2) === TRUE) {
