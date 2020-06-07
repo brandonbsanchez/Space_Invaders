@@ -1,20 +1,38 @@
 body {
     font-family: 'Aldrich';
-    font-size: 20px;
+ 
     margin: 0;
-    padding: 0;    
-    background-image: linear-gradient(rgb(20, 20, 20), rgb(133, 133, 133));
+    padding: 0; 
+    background-image: linear-gradient(rgb(46, 46, 46), white );
     background-repeat: no-repeat;
     color: white;
+}
+#Title {
+    font-size: 30px;
+    margin-top: 50px;
+    padding: 0; 
+}
+#Score {
+    font-size: 20px;
+    margin: 0;
+    padding: 0; 
+}
+#Num {
+    font-size: 20px;
+    margin-left: 80px;
+    margin-top: -22px;
+    padding: 0; 
 }
 #container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 50vh;
 }
 #board {
+    padding: 0;
+    margin: 0;
     height: 600px;
     width: 800px;
     background-image: url(images/background.png);
@@ -74,6 +92,8 @@ body {
 }
 #lives {
     margin-left: -710px;
+    font-size: 25px;
+    color: black;
 }
 tr:nth-child(odd){background-color: rgb(0, 129, 161);}
 tr:nth-child(even){background-color: rgb(0, 79, 99);}
