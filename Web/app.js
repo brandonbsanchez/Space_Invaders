@@ -174,7 +174,7 @@ class Player {
                         this.lasers[i].removeLaser();
                         board.enemies[j].isDead = true;
                         board.enemies[j].removeEnemy();
-                        leaderboard.addScore(10);
+                        leaderboard.addScore(100);
                     }
                 }
             }
@@ -299,6 +299,9 @@ class Leaderboard{
     }
     update(){
         document.getElementById('score').innerHTML = this.score;
+        const theScore = document.getElementById('score').innerHTML;
+        document.getElementById('ldrBrdBtn0').value = theScore;
+        document.getElementById('ldrBrdBtn1').value = theScore;
     }
 
 }
