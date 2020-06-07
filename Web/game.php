@@ -18,7 +18,7 @@
             </div>
             <div id="board"></div>
             <div id="lives">    
-            <?php echo '<img id="icon" src="Images/' . $_POST[$cookie_name] . '" height="25" width="25">'; ?> <span id="livesLeft">3</span>
+            <?php echo '<img id="icon" src="Images/' . $_POST['shipType'] . '" height="25" width="25">'; ?> <span id="livesLeft">3</span>
             </div>
             <div id="won">
                 <h1>Congratulations!</h1>
