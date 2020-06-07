@@ -5,8 +5,8 @@
         <title>Space Invaders</title>
         <link href="styles.css" rel="stylesheet">
         <?php 
-            $cookie_name = "shipType";
-            setcookie($cookie_name, $_POST['shipType'], time() + (86400 * 30), "/");
+            $cookie_name = "name";
+            setcookie($cookie_name, $_POST['name'], time() + (86400 * 30), "/");
         ?>
     </head>
     <body>
