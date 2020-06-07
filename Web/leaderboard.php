@@ -13,9 +13,6 @@
             $shipInput = $_SESSION['shipType'];
             $shipColor = $_SESSION['shipColor'];
 
-            // $_SESSION['topScore'] = $_POST['ldrBrdBtn'];
-            // $highscore = $_SESSION['topScore'];
-
             if(isset($_POST['ldrBrdBtn0'])){
                 $_SESSION['topScore0'] = $_POST['ldrBrdBtn0'];
                 $highscore = $_SESSION['topScore0'];
@@ -23,17 +20,6 @@
                 $_SESSION['topScore1'] = $_POST['ldrBrdBtn1'];
                 $highscore = $_SESSION['topScore1'];
             }
-
-            // $_SESSION['topScore0'] = $_POST['ldrBrdBtn0'];
-            // $_SESSION['topScore1'] = $_POST['ldrBrdBtn1'];
-
-            // if($_SESSION['topScore0'] > $_SESSION['topScore1']){
-            //     $highscore = $_SESSION['topScore0'];
-            // } else {
-            //     $highscore = $_SESSION['topScore1'];
-            // }
-
-            // $highscore = $_SESSION['topScore'];
 
             $scoreInput = ($highscore/100)+1;
 
@@ -53,7 +39,6 @@
 
             if ($conn->query($query) === TRUE) {
                 $idInput = $conn->insert_id;
-                // echo "New record created successfully. Last inserted ID is: " . $idInput."<br>"."<br>";
             } 
             else {
                 echo "Error: " . $query . "<br>" . $conn->error;
@@ -66,13 +51,6 @@
             echo "High Score:   " . $highscore."<br>"."<br>";
 
             $query2 = "INSERT INTO spaceinvaders_xref_plyr_ship_highscore VALUES (DEFAULT, '$idInput', '$shipInput', '$scoreInput')";
-
-            if ($conn->query($query2) === TRUE) {
-                // echo "It worked." . "<br>"."<br>";
-            } 
-            else {
-                // echo "Error: " . $query2 . "<br>" . $conn->error;
-            }
 
             // Query the Database
             $sql = "SELECT `spaceinvaders_entity_player`.`name` AS `Player Name`, `spaceinvaders_enum_color`.`what_color` 

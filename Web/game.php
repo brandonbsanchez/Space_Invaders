@@ -20,7 +20,6 @@
                 <h1>Congratulations!</h1>
                 <h2>You won.</h2>
                 <br>
-                <!-- <button onclick="window.location.reload()">Restart</button> -->
                 <form method="POST" action="leaderboard.php">
                     <button id="ldrBrdBtn0" name="ldrBrdBtn0" type="submit" value=0>View Leaderboard</button>
                 </form>
