@@ -50,6 +50,19 @@
             echo "Ship Color:   " . $shipColor."<br>";
             echo "High Score:   " . $highscore."<br>"."<br>";
 
+            if($shipColor === 'blue.png') {
+                $shipInput = 1;
+            }
+            else if($shipColor === 'green.png') {
+                $shipInput = 2;
+            }
+            else if($shipColor === 'red.png') {
+                $shipInput = 3;
+            }
+            else {
+                $shipInput = 4;
+            }
+
             $query2 = "INSERT INTO spaceinvaders_xref_plyr_ship_highscore VALUES (DEFAULT, '$idInput', '$shipInput', '$scoreInput')";
 
             if ($conn->query($query2) === TRUE) {
