@@ -10,7 +10,7 @@
                   <br><input type="radio" name="shipType" value="blue.png" required>
                   <label for="blue_choice"><img class="icon" src="Images/blue.png">Blue</label><br>
                   <input type="radio" name="shipType" value="green.png" required>
-                  <label for="green_choice"><img class="icon" src="Images/red.png">Green</label><br>
+                  <label for="green_choice"><img class="icon" src="Images/green.png">Green</label><br>
                   <input type="radio" name="shipType" value="red.png" required>
                   <label for="red_choice"><img class="icon" src="Images/red.png">Red</label><br>
                   <input type="radio" name="shipType" value="orange.png" required>
