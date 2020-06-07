@@ -1,100 +1,66 @@
-body {
-    font-family: 'Aldrich';
-    margin: 0;
-    padding: 0;
-    background-image: linear-gradient(rgb(46, 46, 46), white );
-    background-repeat: no-repeat;
-    color: black;
-}
-#Title{
-    font-size: 30px;
-    color: white;
-}
-#S {
-    font-size: 20px;
-}
-#score {
-    font-size: 20px;
-    margin-left: 80px;
-    margin-top: -22px;
-    padding: 0; 
-}
-#container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height:80vh;
-}
-#board {
-    height: 600px;
-    width: 800px;
-    background-image: url(images/background.png);
-    animation: scroll 15s linear infinite;
-}
-#leaderboard{
-    color: white;
-    background-color: black;
-    height: 100px;
-    width: 800px;
-}
-#player {
-    position: absolute;
-    width: 40px;
-    margin-left: -20px; /*Moves center of object to middle*/
-}
-#lifeIcon{
-    width: 25px;
-    height: 25px;
-}
-.icon{
-    width: 25px;
-    height: 25px;
-}
-@keyframes scroll {
-    from {background-position-y: 0px;}
-    to {background-position-y: 1024px;}
-}
-.playerLaser {
-    position: absolute;
-    height: 20px;
-    margin-left: -3.9001px;
-}
-.enemyLaser {
-    position: absolute;
-    height: 20px;
-    margin-left: -10px;
-}
-.enemy {
-    position: absolute;
-    width: 40px;
-    margin-left: -20px;
-}
-#won {
-    display: none;
-    position: absolute;
-    background-color: rgb(17, 102, 14);
-    text-align: center;
-    border: solid 1px black;
-    padding: 25px;
-    border-radius: 30px;
-}
-#lost {
-    display: none;
-    position: absolute;
-    background-color: #862828;
-    text-align: center;
-    border: solid 1px black;
-    padding: 10px 50px;
-    border-radius: 30px;
-}
-#won button, #lost button {
-    padding: 10px;
-    border-radius: 5px;
-}
-#lives {
-    margin-left: -710px;
-    font-size: 20px;
-}
-tr:nth-child(odd){background-color: rgb(107, 107, 107);}
-tr:nth-child(even){background-color: rgb(153, 153, 153);}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Space Invaders</title>
+        <link href='https://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet'>
+        <link href="styles.css" rel="stylesheet">
+        <?php 
+            $cookie_name = "name";
+            setcookie($cookie_name, $_POST['name'], time() + (86400 * 30), "/");
+        ?>
+    </head>
+    <body>
+    <div id="Title" style="text-align:center;">SPACE INVADERS</div>
+        <div id="container">
+                <div id="leaderboard">
+                    <div id="S">Score:</div>
+                    <div id="score">0</div>
+                </div>
+            <div id="board"></div>
+            <div id="lives">    
+            <?php echo '<img id="icon" src="Images/' . $_POST['shipType'] . '" height="25" width="25">'; ?> <span id="livesLeft">3</span>
+            </div>
+            <div id="won">
+                <h1>Congratulations!</h1>
+                <h2>You won.</h2>
+                <br>
+                <form method="POST" action="leaderboard.php">
+                    <button id="ldrBrdBtn0" name="ldrBrdBtn0" type="submit" value=0>View Leaderboard</button>
+                </form>
+            </div>
+            <div id="lost">
+                <h1>Game over.</h1>
+                <h2>You lost.</h2>
+                <br>
+                <form method="POST" action="leaderboard.php">
+                    <button id="ldrBrdBtn1" name="ldrBrdBtn1" type="submit" value=0>View Leaderboard</button>
+                </form>
+            </div>
+        </div>
+
+        <script src="app.js"></script>
+
+        <?php  
+            session_start();
+
+            $_SESSION['name'] = $_POST['name'];
+            $_SESSION['shipColor'] = $_POST['shipType'];
+
+            switch($_POST['shipType']){
+                case "Blue":
+                    $_SESSION['shipType'] = 1;
+                    break;
+                case "Green":
+                    $_SESSION['shipType'] = 2;
+                    break;
+                case "Red":
+                    $_SESSION['shipType'] = 3;
+                    break;
+                case "Yellow":
+                    $_SESSION['shipType'] = 4;
+                    break;
+            }
+        ?>
+    </body>
+</html>
