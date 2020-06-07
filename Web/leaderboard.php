@@ -52,6 +52,13 @@
 
             $query2 = "INSERT INTO spaceinvaders_xref_plyr_ship_highscore VALUES (DEFAULT, '$idInput', '$shipInput', '$scoreInput')";
 
+            if ($conn->query($query2) === TRUE) {
+                // echo "It worked." . "<br>"."<br>";
+            } 
+            else {
+                // echo "Error: " . $query2 . "<br>" . $conn->error;
+            }
+
             // Query the Database
             $sql = "SELECT `spaceinvaders_entity_player`.`name` AS `Player Name`, `spaceinvaders_enum_color`.`what_color` 
             AS `Ship Color`, `spaceinvaders_entity_highscore`.`highscore` AS `High Score` 
