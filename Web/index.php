@@ -1,53 +1,100 @@
-<!DOCTYPE html>
-<html>
-    <head>
-    <link href="style1.css" rel="stylesheet">    
-    <link href='https://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet'>
-    <title>SPACE INVADERS START</title>
-    </head>
-    
-    <body>    
-        <form method="post" action="game.php">
-            
-                <div class="Title" style="text-align:center;">SPACE INVADERS</div>
-                <div class="Under" style="text-align:center;">*please enter your name and select a ship to start*</div>
-            NAME: <input type="text" id="name" name="name" required><br><br>
-            
-            SHIP:
-                  <br><input type="radio" id="default" name="shipType" value="default" required>
-                  <label for="blue_choice" style="color:blue;">Blue</label><br>
-                  <input type="radio" id="default" name="shipType" value="default" required>
-                  <label for="green_choice" style="color:green;">Green</label><br>
-                  <input type="radio" id="default" name="shipType" value="default" required>
-                  <label for="red_choice" style="color:red;">Red</label><br>
-                  <input type="radio" id="default" name="shipType" value="default" required>
-                  <label for="yellow_choice" style="color:yellow;">Yellow</label><br><br>
-            <input type="submit" value="SUBMIT">
-        </form>
-
-        <!-- <?php
-            $servername = "209.129.8.7";
-            $username = "RCCCSCCIS17B";
-            $password = "4050240368";
-            $dbname = "RCCCSCCIS17B";
-
-            $nameP = $_GET['name'];
-
-            // Create connection
-            $conn = new mysqli($servername, $username, $password, $dbname);
-            // Check connection
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
-
-            $sql = "INSERT INTO spaceinvaders_entity_player (name)
-            VALUES (DEFAULT, $nameP)";
-
-            if ($conn->query($sql) === TRUE) {
-                echo "New record created successfully";
-            } else {
-                echo "Error: " . $sql . "<br>" . $conn->error;
-            }
-        ?> -->
-    </body>
-</html>
+body {
+    font-family: 'Aldrich';
+    margin: 0;
+    padding: 0;
+    background-image: linear-gradient(rgb(46, 46, 46), white );
+    background-repeat: no-repeat;
+    color: black;
+}
+#Title{
+    font-size: 30px;
+    color: white;
+}
+#S {
+    font-size: 20px;
+}
+#score {
+    font-size: 20px;
+    margin-left: 80px;
+    margin-top: -22px;
+    padding: 0; 
+}
+#container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height:80vh;
+}
+#board {
+    height: 600px;
+    width: 800px;
+    background-image: url(images/background.png);
+    animation: scroll 15s linear infinite;
+}
+#leaderboard{
+    color: white;
+    background-color: black;
+    height: 100px;
+    width: 800px;
+}
+#player {
+    position: absolute;
+    width: 40px;
+    margin-left: -20px; /*Moves center of object to middle*/
+}
+#lifeIcon{
+    width: 25px;
+    height: 25px;
+}
+.icon{
+    width: 25px;
+    height: 25px;
+}
+@keyframes scroll {
+    from {background-position-y: 0px;}
+    to {background-position-y: 1024px;}
+}
+.playerLaser {
+    position: absolute;
+    height: 20px;
+    margin-left: -3.9001px;
+}
+.enemyLaser {
+    position: absolute;
+    height: 20px;
+    margin-left: -10px;
+}
+.enemy {
+    position: absolute;
+    width: 40px;
+    margin-left: -20px;
+}
+#won {
+    display: none;
+    position: absolute;
+    background-color: rgb(17, 102, 14);
+    text-align: center;
+    border: solid 1px black;
+    padding: 25px;
+    border-radius: 30px;
+}
+#lost {
+    display: none;
+    position: absolute;
+    background-color: #862828;
+    text-align: center;
+    border: solid 1px black;
+    padding: 10px 50px;
+    border-radius: 30px;
+}
+#won button, #lost button {
+    padding: 10px;
+    border-radius: 5px;
+}
+#lives {
+    margin-left: -710px;
+    font-size: 20px;
+}
+tr:nth-child(odd){background-color: rgb(107, 107, 107);}
+tr:nth-child(even){background-color: rgb(153, 153, 153);}
