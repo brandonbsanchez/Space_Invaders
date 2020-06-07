@@ -7,15 +7,15 @@
         <link href="styles.css" rel="stylesheet">
     </head>
     <body>
-    <h1 style="text-align:center;">SPACE INVADERS</h1>
+    <div id="Title" style="text-align:center;">SPACE INVADERS</div>
         <div id="container">
             <div id="leaderboard">
-                <h3>Score:</h3>
-                <h3 id="score">0</h3>
+                <div id="Score">Score:</div>
+                <div id="Num" id="score">0</div>
             </div>
             <div id="board"></div>
             <div id="lives">    
-                <h1>Lives: <span id="livesLeft">3</span></h1>
+                <div class="Lives">Lives: <span id="livesLeft">3</span></div>
             </div>
             <div id="won">
                 <h1>Congratulations!</h1>
