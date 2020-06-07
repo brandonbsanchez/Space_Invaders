@@ -33,6 +33,26 @@
 
             $result = $conn->query($sql);
 
+            function getShipImg($shipColor){
+                $filename = "";
+                if($shipColor=="Red"){
+                    $filename="red.png";
+                    return $filename;
+                }
+                elseif($shipColor=="Blue"){
+                    $filename="blue.png";
+                    return $filename;
+                }
+                elseif($shipColor=="Green"){
+                    $filename="green.png";
+                    return $filename;
+                }
+                elseif($shipColor=="Yellow"){
+                    $filename="orange.png";
+                    return $filename;
+                }
+            }
+
             echo "<table border='1'>";
                 echo "<tr>";
                     echo "<th>".'Rank'."</th>";
@@ -49,7 +69,7 @@
                     echo "<tr>";
                         echo "<td>".$rank."</td>";
                         echo "<td>".$re["Player Name"]."</td>";
-                        echo "<td>".$re["Ship Color"]."</td>";
+                        echo "<td><img src=Images/".getShipImg($re["Ship Color"])."></td>";
                         echo "<td>".$re["High Score"]."</td>";
                     echo "</tr>";
                     $rank++;
