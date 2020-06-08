@@ -11,7 +11,7 @@
         ?>
     </head>
     <body>
-    <div id="Title" style="text-align:center;">SPACE INVADERS</div>
+    
         <div id="container">
                 <div id="leaderboard">
                     <div id="S">Score:</div>
