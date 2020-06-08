@@ -9,7 +9,11 @@
     <form method="post" action="game.php">
                 <div class="Title" style="text-align:center;">SPACE INVADERS</div>
                 <div class="Under" style="text-align:center;">*please enter your name and select a ship to start*</div>
-            Name: <input type="text" id="name" name="name" required><br><br>
+            Name: <?php if(isset($_COOKIE['name'])){
+                echo '<input type="text" id="name" name="name" value="' . $_COOKIE["name"] . '" required><br><br>';
+            } else{
+                echo '<input type="text" id="name" name="name" require><br><br>';
+            }?>
             Ship:
                   <br><input type="radio" name="shipType" value="blue.png" required>
                   <label for="blue_choice"><img class="icon" src="Images/blue.png">Blue</label><br>

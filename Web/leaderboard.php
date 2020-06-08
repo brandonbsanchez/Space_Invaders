@@ -9,7 +9,11 @@
         <?php
             session_start();
 
-            $name = $_SESSION['name'];
+            if(isset($_COOKIE['name'])){
+                $name = $_COOKIE['name'];
+            } else{
+                $name = $_SESSION['name'];
+            }
             $shipInput = $_SESSION['shipType'];
             $shipColor = $_SESSION['shipColor'];
 
