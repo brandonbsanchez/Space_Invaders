@@ -48,16 +48,16 @@
             $_SESSION['shipColor'] = $_POST['shipType'];
 
             switch($_POST['shipType']){
-                case "Blue":
+                case "blue.png":
                     $_SESSION['shipType'] = 1;
                     break;
-                case "Green":
+                case "green.png":
                     $_SESSION['shipType'] = 2;
                     break;
-                case "Red":
+                case "red.png":
                     $_SESSION['shipType'] = 3;
                     break;
-                case "Yellow":
+                case "orange.png":
                     $_SESSION['shipType'] = 4;
                     break;
             }
