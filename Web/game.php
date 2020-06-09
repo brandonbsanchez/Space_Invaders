@@ -7,7 +7,7 @@
         <link href="styles.css" rel="stylesheet">
         <?php 
             $username = $_POST['name'];
-            if(!preg_match('/^[a-Z0-9]*$/', $username)){ //Username can only be alpha-numeric.
+            if(!preg_match('/^[a-zA-Z0-9]*$/', $username)){ //Username can only be alpha-numeric.
                 header('Location: index.php?error=invalidusername'); //Alert user of error.
                 exit(); //Kill script.
             }
