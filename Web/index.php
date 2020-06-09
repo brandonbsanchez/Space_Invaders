@@ -14,13 +14,12 @@
             //Check for errors in username:
             if(isset($_GET['error']) == 'invalidusername'){ //If invalidusername, alert user:
                 echo '<p id="error">Invalid entry: Enter only alpha-numeric characters.</p>';
-            } else{ 
+            }
                 echo 'Name:'; if(isset($_COOKIE['name'])){
                     echo '<input type="text" id="name" name="name" value="' . $_COOKIE["name"] . '" required><br><br>';
                 } else{
                     echo '<input type="text" id="name" name="name" require><br><br>';
                 }
-            }
             ?>
             Ship:
                   <br><input type="radio" name="shipType" value="blue.png" required>
