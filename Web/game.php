@@ -6,8 +6,15 @@
         <link href='https://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet'>
         <link href="styles.css" rel="stylesheet">
         <?php 
+            $username = $_POST['name'];
+            if(!preg_match('/^[a-Z0-9]*$/', $username)){ //Username can only be alpha-numeric.
+                header('Location: index.php?error=invalidusername'); //Alert user of error.
+                exit(); //Kill script.
+            }
+            //Set cookie:
             $cookie_name = "name";
             setcookie($cookie_name, $_POST['name'], time() + (86400 * 30), "/");
+
         ?>
     </head>
     <body>
